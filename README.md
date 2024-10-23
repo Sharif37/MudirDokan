@@ -40,7 +40,7 @@ To set up the project locally, follow these steps:
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/your-username/mudirdokan.git
+   git clone https://github.com/Sharif37/MudirDokan.git
    ```
 
 2. **Navigate to the project directory:**
@@ -83,7 +83,7 @@ We welcome contributions to Mudirdokan! To contribute, please follow these steps
    - After forking, you need to clone the repository to your local machine. Run the following command in your terminal, replacing `your-username` with your GitHub username:
 
    ```bash
-   git clone https://github.com/your-username/mudirdokan.git
+   git clone https://github.com/Sharif37/MudirDokan.git
    ```
 
 3. **Navigate into your cloned directory:**
