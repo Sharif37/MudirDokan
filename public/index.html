@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mudirdokan API Documentation</title>
+    <link rel="stylesheet" href="./styles/index.css">
+</head>
+<body>
+    <header>
+        <h1>Mudirdokan API Documentation</h1>
+        <p>Welcome to the Mudirdokan API documentation. This platform is designed to facilitate online shopping for food and grocery items.</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#about">About the Project</a></li>
+            <li><a href="#features">Key Features</a></li>
+            <li><a href="#api-endpoints">API Endpoints</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="about">
+            <h2>About the Project</h2>
+            <p>Mudirdokan is an industry-standard e-commerce platform that enables users to order food and grocery items conveniently. Our goal is to provide a seamless online shopping experience, ensuring quality products and excellent customer service.</p>
+        </section>
+
+        <section id="features">
+            <h2>Key Features</h2>
+            <ul>
+                <li>User registration and authentication</li>
+                <li>Product catalog with detailed descriptions</li>
+                <li>Shopping cart functionality</li>
+                <li>Order placement and tracking</li>
+                <li>Secure payment processing</li>
+            </ul>
+        </section>
+
+        <section id="api-endpoints">
+            <h2>API Endpoints</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Endpoint</th>
+                        <th>Method</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>/api/products</td>
+                        <td>GET</td>
+                        <td>Retrieve a list of all products available for sale.</td>
+                    </tr>
+                    <tr>
+                        <td>/api/products/:id</td>
+                        <td>GET</td>
+                        <td>Retrieve detailed information about a specific product.</td>
+                    </tr>
+                    <tr>
+                        <td>/api/cart</td>
+                        <td>POST</td>
+                        <td>Add an item to the shopping cart.</td>
+                    </tr>
+                    <tr>
+                        <td>/api/orders</td>
+                        <td>POST</td>
+                        <td>Place a new order.</td>
+                    </tr>
+                    <tr>
+                        <td>/api/users/register</td>
+                        <td>POST</td>
+                        <td>Create a new user account.</td>
+                    </tr>
+                    <tr>
+                        <td>/api/users/login</td>
+                        <td>POST</td>
+                        <td>Authenticate a user and start a session.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Mudirdokan. All rights reserved.</p>
+    </footer>
+</body>
+</html>
