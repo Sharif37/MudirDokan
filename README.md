@@ -24,7 +24,7 @@ Mudirdokan is an industry-standard e-commerce platform that allows users to orde
 
 - **Frontend:** React
 - **Backend:** Node.js with Express (TypeScript)
-- **Database:** MySQL
+- **Database:** PostgreSQL
 - **Query Builder:** Kysely
 - **Data Validation:** Zod
 - **Message Queue:** RabbitMQ
@@ -126,4 +126,5 @@ We welcome contributions to Mudirdokan! To contribute, please follow these steps
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License. <br /><br />
+HAPPY CODING :)
