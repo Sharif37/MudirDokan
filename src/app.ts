@@ -20,10 +20,12 @@ app.use(express.static("public"));
 app.use(cors());
 app.use(express.json());
 
-import registerRoute from "./controllers/signUpRouter";
+import registerRoute from "./routes/signupRoutes";
+import loginRoutes from "./routes/loginRoutes" ;
 
 //authentication and authoriazation routes 
 app.use("/api/register", registerRoute);
+app.use("/api/login",loginRoutes) ;
 
 // Routes
 app.get('/', async (req,res)=>{

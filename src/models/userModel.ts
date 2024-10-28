@@ -15,3 +15,22 @@ export const createUser = async (userData: UsersInsert) => {
     throw error; 
   }
 };
+
+
+export const getUserByEmail = async (email: string) => {
+  return await db
+    .selectFrom("users")
+    .selectAll()
+    .where("users.user_email", "=", email)
+    .executeTakeFirst();
+};
+
+export const getUserRoleById = async (userId: string) => {
+  return await db
+    .selectFrom("role")
+    .select("role.role_type")
+    .innerJoin("users","users.role_id","role.role_id")
+    .where("users.user_id", "=", userId)
+    .executeTakeFirst();
+};
+
