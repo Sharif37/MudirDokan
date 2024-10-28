@@ -1,5 +1,5 @@
 import { db } from "../../src/database/index";
-import { UsersInsert, RoleInsert } from '../database/index'; // Import necessary types
+import { UsersInsert, RoleInsert } from '../database/index'; 
 
 // Function to create a new user
 export const createUser = async (userData: UsersInsert) => {
@@ -15,4 +15,3 @@ export const createUser = async (userData: UsersInsert) => {
     throw error; 
   }
 };
-

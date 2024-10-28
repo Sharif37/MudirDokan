@@ -114,6 +114,7 @@ export interface Users {
   created_at: ColumnType<Date, string | undefined, never> | null;
   updated_at: ColumnType<Date, string | undefined, never> | null;
   role_id: number | null;
+  user_name:string | null ;
 }
 
 // VariationOptions table
