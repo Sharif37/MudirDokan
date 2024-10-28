@@ -1,27 +1,31 @@
 // signUpRouter.ts
-import express, { RouterOptions, Request, Response } from "express";
+import { Request, Response } from "express";
 import { z } from "zod";
-import { registerCustomer } from "../services/userService";
+import { registerUser } from "../services/userService";
 
-const routerOptions: RouterOptions = {
-  caseSensitive: true,
-};
-const signUpRouter = express.Router(routerOptions);
+/*
+ if user is Admin set role_id =1,
+ if user is customer set role_id=2 ,
+ if user is staff set role_id=3 
+*/
+  
 
-// Schema definition for user data, aligned with Users interface
 export const UserBodySchema = z.object({
+  user_name: z.string().optional(),
   user_email: z.string().email(),
   user_phone: z.string().optional(),
   user_image_url: z.string().url().optional(),
   password: z.string().min(5),
-  role_id: z.number().optional(), 
 });
 
-// POST route to register a new customer
-signUpRouter.post("/customer", async (req: Request, res: Response) => {
+export const userRegistration = async (
+  req: Request,
+  res: Response,
+  role_id: number
+) => {
   try {
     const userData = UserBodySchema.parse(req.body);
-    const user_id = await registerCustomer(userData);
+    const user_id = await registerUser(userData, role_id);
 
     res.status(201).json({
       user_id: user_id,
@@ -37,6 +41,4 @@ signUpRouter.post("/customer", async (req: Request, res: Response) => {
       res.status(500).json({ message: "Error registering user", error });
     }
   }
-});
-
-export default signUpRouter;
+};
