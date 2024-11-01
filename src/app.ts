@@ -1,9 +1,8 @@
-import "./loadEnviroment";
-import express from 'express';
-import cors from 'cors';
-import path from "path";
 import cookieParser from "cookie-parser";
-import dotenv from 'dotenv';
+import cors from "cors";
+import express from "express";
+import path from "path";
+import "./loadEnviroment";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -15,23 +14,23 @@ app.use(cookieParser(process.env.SECRET_KEY));
 app.use(cors());
 app.use(express.static("public"));
 
-
 // Middleware
 app.use(cors());
 app.use(express.json());
 
+import loginRoutes from "./routes/loginRoutes";
 import registerRoute from "./routes/signupRoutes";
-import loginRoutes from "./routes/loginRoutes" ;
+import userRoutes from "./routes/userRoutes"
 
-//authentication and authoriazation routes 
+//authentication and authoriazation routes
 app.use("/api/register", registerRoute);
-app.use("/api/login",loginRoutes) ;
+app.use("/api/login", loginRoutes);
+app.use("/api/user", userRoutes);
 
 // Routes
-app.get('/', async (req,res)=>{
+app.get("/", async (req, res) => {
   res.send("Welcome to the backend server!");
 });
-
 
 // Start the server
 app.listen(PORT, () => {

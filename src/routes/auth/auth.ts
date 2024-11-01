@@ -18,7 +18,7 @@ export function verifySession(
   try {
     const bearerHeader = authHeader.parse(req.headers["authorization"]);
     const token = z.string().parse(bearerHeader.split(" ")[1]);
-   /// console.log(token);
+    //console.log(token);
 
     // Verify the token here
     jwt.verify(
