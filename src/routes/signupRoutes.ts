@@ -2,7 +2,7 @@
 import express, { RouterOptions, Request, Response } from "express";
 import { userRegistration } from "../controllers/signUpController";
 import { Role } from "./auth/roles";
-Role
+
 
 
 const routerOptions: RouterOptions = {

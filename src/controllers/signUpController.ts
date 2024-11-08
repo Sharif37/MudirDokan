@@ -15,7 +15,7 @@ export const UserBodySchema = z.object({
   user_email: z.string().email(),
   user_phone: z.string().optional(),
   user_image_url: z.string().url().optional(),
-  password: z.string().min(5),
+  password: z.string().min(6),
 });
 
 export const userRegistration = async (
