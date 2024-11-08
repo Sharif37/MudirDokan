@@ -3,13 +3,15 @@ import { Pool } from 'pg'
 import { Kysely, PostgresDialect } from 'kysely'
 import { ColumnType, Generated, JSONColumnType, Selectable, Insertable, Updateable } from "kysely";
 
+export type Timestamp = ColumnType<Date, Date | string, Date | string>;
+
 // Define the complete Database schema for Kysely
 export interface DB {
   address: Address;
   auth_session: AuthSession;
+  images: Images;
   product: Product;
   product_category: ProductCategory;
-  product_images: ProductImages;
   product_item: ProductItem;
   product_variation: ProductVariation;
   role: Role;
@@ -106,15 +108,15 @@ export interface UserAddress {
 
 // Users table
 export interface Users {
-  user_id: string;
-  user_email: string | null;
-  user_phone: string | null;
-  user_image_url: string | null;
-  user_password: string | null;
-  created_at: ColumnType<Date, string | undefined, never> | null;
-  updated_at: ColumnType<Date, string | undefined, never> | null;
+  created_at: Timestamp | null;
   role_id: number | null;
-  user_name:string | null ;
+  updated_at: Timestamp | null;
+  user_email: string | null;
+  user_id: string;
+  user_image_url: string | null;
+  user_name: string | null;
+  user_password: string | null;
+  user_phone: string | null;
 }
 
 // VariationOptions table
@@ -123,6 +125,18 @@ export interface VariationOptions {
   product_variation_id: number | null;
   value: string | null;
 }
+
+
+
+
+
+export interface Images {
+  created_at: Generated<Timestamp | null>;
+  image_filename: string;
+  image_id: Generated<number>;
+  product_id: number;
+}
+
 
 // Type-safe wrappers for database operations
 export type AddressInsert = Insertable<Address>;
@@ -177,7 +191,6 @@ export type UserAddressUpdate = Updateable<UserAddress>;
 export type VariationOptionsSelect = Selectable<VariationOptions>;
 export type VariationOptionsInsert = Insertable<VariationOptions>;
 export type VariationOptionsUpdate = Updateable<VariationOptions>;
-
 
 
 
