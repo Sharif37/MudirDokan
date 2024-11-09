@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uploads API - Mudirdokan</title>
+    <link rel="stylesheet" href="./styles/index.css">
+</head>
+<body>
+    <header>
+        <h1>Uploads API</h1>
+        <p>Endpoints for handling image uploads and retrieval in Mudirdokan. Access is restricted to Admin users only.</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="orders.html">Orders</a></li>
+            <li><a href="users.html">Users</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="upload-image">
+            <h2>1. Upload Images for Product</h2>
+            <p><strong>Endpoint:</strong> <code>/api/uploads/image</code></p>
+            <p><strong>Method:</strong> POST</p>
+            <p><strong>Description:</strong> Allows admins to upload up to 8 images for a single product. Requires <code>product_id</code> in the request body.</p>
+
+            <h3>Request:</h3>
+            <pre>
+POST /api/uploads/image
+Content-Type: multipart/form-data
+
+{
+  "product_id": "123",         // ID of the product to which images belong
+  "images": [file1, file2, ...] // Up to 8 images for the product
+}
+            </pre>
+
+            <h3>Response:</h3>
+            <pre>
+{
+  "message": "Images uploaded successfully",
+  "uploadedImages": [
+    { "image_id": 1, "filename": "generated_filename_1.jpg" },
+    { "image_id": 2, "filename": "generated_filename_2.jpg" },
+    ...
+  ]
+}
+            </pre>
+            <h3>Errors:</h3>
+            <ul>
+                <li><strong>400 Bad Request:</strong> Invalid or missing product ID, or no images uploaded.</li>
+                <li><strong>500 Internal Server Error:</strong> Error uploading images or saving information to the database.</li>
+            </ul>
+        </section>
+
+        <section id="get-image">
+            <h2>2. Retrieve Image by Filename</h2>
+            <p><strong>Endpoint:</strong> <code>/api/uploads/:image_filename</code></p>
+            <p><strong>Method:</strong> GET</p>
+            <p><strong>Description:</strong> Retrieves an image file by filename, as stored in the uploads directory. If the filename exists in the database, the image is sent back to the requester.</p>
+
+            <h3>Request:</h3>
+            <pre>
+GET /api/uploads/image_filename.jpg
+            </pre>
+
+            <h3>Response:</h3>
+            <pre>
+// Image content in binary stream, or 404 if image not found
+(binary image data)
+            </pre>
+
+            <h3>Errors:</h3>
+            <ul>
+                <li><strong>404 Not Found:</strong> Image with the specified filename does not exist.</li>
+                <li><strong>500 Internal Server Error:</strong> Error retrieving the image from storage.</li>
+            </ul>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Mudirdokan. All rights reserved.</p>
+    </footer>
+</body>
+</html>

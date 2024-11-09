@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users API - Mudirdokan</title>
+    <link rel="stylesheet" href="./styles/index.css">
+</head>
+<body>
+    <header>
+        <h1>Users API</h1>
+        <p>Endpoints for managing user registration, login, and data retrieval. Different roles are supported, including Admin, Customer, and Staff.</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="uploads.html">Uploads</a></li>
+            <li><a href="orders.html">Orders</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- Registration Endpoints -->
+        <section id="registration">
+            <h2>1. User Registration</h2>
+            <p><strong>Endpoints:</strong></p>
+            <ul>
+                <li><code>/api/register/customer</code> (for Customers)</li>
+                <li><code>/api/register/admin</code> (for Admins)</li>
+                <li><code>/api/register/staff</code> (for Staff)</li>
+            </ul>
+            <p><strong>Method:</strong> POST</p>
+            <p><strong>Description:</strong> Register a new user with the specified role. Each role has unique access permissions within the system.</p>
+
+            <h3>Request:</h3>
+            <pre>
+POST /api/register/{role}
+Content-Type: application/json
+
+{
+  "user_name": "Jane Doe",
+  "user_email": "jane.doe@example.com",
+  "user_phone": "1234567890",
+  "user_image_url": "http://example.com/image.jpg",
+  "password": "securepassword"
+}
+            </pre>
+
+            <h3>Response:</h3>
+            <pre>
+{
+  "user_id": 1,
+  "message": "User registered successfully"
+}
+            </pre>
+
+            <h3>Errors:</h3>
+            <ul>
+                <li><strong>400 Bad Request:</strong> Invalid or missing fields.</li>
+                <li><strong>500 Internal Server Error:</strong> Error registering the user.</li>
+            </ul>
+        </section>
+
+        <!-- Login Endpoint -->
+        <section id="login">
+            <h2>2. User Login</h2>
+            <p><strong>Endpoint:</strong> <code>/api/login/user</code></p>
+            <p><strong>Method:</strong> POST</p>
+            <p><strong>Description:</strong> Authenticates a user based on email and password, returning a token if successful.</p>
+
+            <h3>Request:</h3>
+            <pre>
+POST /api/login/user
+Content-Type: application/json
+
+{
+  "email": "jane.doe@example.com",
+  "password": "securepassword"
+}
+            </pre>
+
+            <h3>Response:</h3>
+            <pre>
+{
+  "message": "Successfully logged in",
+  "role": "Customer",
+  "token": "generated_token_here"
+}
+            </pre>
+
+            <h3>Errors:</h3>
+            <ul>
+                <li><strong>400 Bad Request:</strong> Invalid data format.</li>
+                <li><strong>404 Not Found:</strong> User not found, or role not assigned.</li>
+                <li><strong>403 Forbidden:</strong> Password mismatch.</li>
+                <li><strong>500 Internal Server Error:</strong> Error logging in the user.</li>
+            </ul>
+        </section>
+
+        <!-- Retrieve Current User Data -->
+        <section id="user-data">
+            <h2>3. Retrieve Current User Data</h2>
+            <p><strong>Endpoint:</strong> <code>/api/user/me</code></p>
+            <p><strong>Method:</strong> GET</p>
+            <p><strong>Description:</strong> Retrieves information about the currently logged-in user based on their session. Available only to Admins and Staff.</p>
+
+            <h3>Request:</h3>
+            <pre>
+GET /api/user/me
+Authorization: Bearer {token}
+            </pre>
+
+            <h3>Response:</h3>
+            <pre>
+{
+  "user": {
+    "user_id": 1,
+    "user_name": "Jane Doe",
+    "user_email": "jane.doe@example.com",
+    "user_phone": "1234567890",
+    "user_image_url": "http://example.com/image.jpg",
+    "role": "Admin"
+  }
+}
+            </pre>
+
+            <h3>Errors:</h3>
+            <ul>
+                <li><strong>400 Bad Request:</strong> Missing or invalid user ID.</li>
+                <li><strong>404 Not Found:</strong> User does not exist.</li>
+                <li><strong>500 Internal Server Error:</strong> Error retrieving user data.</li>
+            </ul>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Mudirdokan. All rights reserved.</p>
+    </footer>
+</body>
+</html>
