@@ -24,13 +24,13 @@ export async function deleteProduct(productId: number) {
 }
 
 // Get all categories
-export async function getAllCategories() {
-  return await productModel.getAllCategories();
+export  function getAllCategories() {
+  return  productModel.getAllCategories();
 }
 
 // Get all products by category
-export async function getProductsByCategoryId(categoryId: number) {
-  return await productModel.getProductsByCategoryId(categoryId);
+export  function getProductsByCategoryId(categoryId: number) {
+  return  productModel.getProductsByCategoryId(categoryId);
 }
 
 

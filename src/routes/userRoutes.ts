@@ -6,6 +6,6 @@ import { Roles } from "./auth/roles";
 const router = express.Router();
 
 
-router.get("/me", verifySession,requireRole([Roles.Customer]), getCurrentUserData);
+router.get("/me", verifySession,requireRole([Roles.Staff,Roles.Admin]), getCurrentUserData);
 
 export default router;

@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
 import { z } from "zod";
+import { addFiltration } from "../helper/addFiltration";
+import { paginatedResults } from "../helper/paginatedResults";
 import * as productService from "../services/productService";
 
 const ProductSchema = z.object({
@@ -8,7 +10,10 @@ const ProductSchema = z.object({
   product_old_price: z.number().nullable(),
   product_description: z.object({ details: z.string() }).nullable().optional(),
   product_category_id: z.number().nullable(),
-  product_term_and_condition: z.object({ terms: z.string() }).nullable().optional(),
+  product_term_and_condition: z
+    .object({ terms: z.string() })
+    .nullable()
+    .optional(),
 });
 
 // Fetch a product by ID
@@ -33,11 +38,16 @@ export async function createProduct(req: Request, res: Response) {
 
     const formattedProductData = {
       ...productData,
-      product_description: productData.product_description ? JSON.stringify(productData.product_description) : null,
-      product_term_and_condition: productData.product_term_and_condition ? JSON.stringify(productData.product_term_and_condition) : null,
+      product_description: productData.product_description
+        ? JSON.stringify(productData.product_description)
+        : null,
+      product_term_and_condition: productData.product_term_and_condition
+        ? JSON.stringify(productData.product_term_and_condition)
+        : null,
     };
 
-    const createdProduct = await productService.createProduct(formattedProductData);
+    const createdProduct =
+      await productService.createProduct(formattedProductData);
     res.status(201).json({
       message: "Product created successfully",
       product: createdProduct,
@@ -58,8 +68,12 @@ export async function updateProduct(req: Request, res: Response) {
 
     const formattedProductData = {
       ...productData,
-      product_description: productData.product_description ? JSON.stringify(productData.product_description) : null,
-      product_term_and_condition: productData.product_term_and_condition ? JSON.stringify(productData.product_term_and_condition) : null,
+      product_description: productData.product_description
+        ? JSON.stringify(productData.product_description)
+        : null,
+      product_term_and_condition: productData.product_term_and_condition
+        ? JSON.stringify(productData.product_term_and_condition)
+        : null,
     };
 
     await productService.updateProduct(productId, formattedProductData);
@@ -87,8 +101,9 @@ export async function deleteProduct(req: Request, res: Response) {
 // Fetch all product categories
 export async function getAllCategories(req: Request, res: Response) {
   try {
-    const categories = await productService.getAllCategories();
-    res.status(200).json(categories);
+    var query = productService.getAllCategories();
+    query = addFiltration("product_category", query, req);
+    paginatedResults(query as any, req, res);
   } catch (error) {
     res.status(500).json({ message: "Error fetching categories", error });
   }
@@ -98,9 +113,18 @@ export async function getAllCategories(req: Request, res: Response) {
 export async function getProductsByCategory(req: Request, res: Response) {
   try {
     const categoryId = parseInt(req.params.categoryId);
-    const products = await productService.getProductsByCategoryId(categoryId);
-    res.status(200).json(products);
+
+    if (isNaN(categoryId)) {
+      return res.status(400).json({ message: "Invalid category ID" });
+    }
+
+    var query = productService.getProductsByCategoryId(categoryId);
+    query = addFiltration("product", query, req);
+    paginatedResults(query as any, req, res);
   } catch (error) {
-    res.status(500).json({ message: "Error fetching products by category", error });
+    console.error("Error fetching products by category:", error);
+    res
+      .status(500)
+      .json({ message: "Error fetching products by category", error });
   }
 }
