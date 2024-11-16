@@ -113,7 +113,7 @@ export interface VariationOptions {
 }
 
 
-
+//cart table 
 
 
 export interface Images {
@@ -198,6 +198,7 @@ export interface DB {
   user_address: UserAddress;
   users: Users;
   variation_options: VariationOptions;
+  
 }
 
   export type TableName =
