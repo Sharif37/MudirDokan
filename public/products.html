@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products API - Mudirdokan</title>
+    <link rel="stylesheet" href="./styles/index.css">
+</head>
+<body>
+    <header>
+        <h1>Products API</h1>
+        <p>Endpoints for managing and retrieving products in Mudirdokan. This API requires admin privileges for CRUD operations and category management.</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="orders.html">Orders</a></li>
+            <li><a href="users.html">Users</a></li>
+            <li><a href="uploads.html">Uploads</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="get-product">
+            <h3>1. Get Product by ID</h3>
+            <p><strong>Endpoint:</strong> <code>/api/products/:id</code></p>
+            <p><strong>Method:</strong> GET</p>
+            <p><strong>Description:</strong> Retrieve detailed information about a specific product by its ID. This endpoint is restricted to Admins.</p>
+            <h4>Request:</h4>
+            <pre>
+GET /api/products/1
+            </pre>
+            <h4>Response:</h4>
+            <pre>
+{
+  "product_id": 1,
+  "product_name": "Apple",
+  "product_price": 3.5,
+  "product_description": "Fresh red apples",
+  "product_category_id": 2
+}
+            </pre>
+        </section>
+
+        <section id="create-product">
+            <h3>2. Create a New Product</h3>
+            <p><strong>Endpoint:</strong> <code>/api/products</code></p>
+            <p><strong>Method:</strong> POST</p>
+            <p><strong>Description:</strong> Create a new product. Admins must provide product details such as name, price, description, and category.</p>
+            <h4>Request:</h4>
+            <pre>
+POST /api/products
+Content-Type: application/json
+
+{
+  "product_name": "Banana",
+  "product_price": 1.2,
+  "product_description": "Fresh ripe bananas",
+  "product_category_id": 3
+}
+            </pre>
+            <h4>Response:</h4>
+            <pre>
+{
+  "message": "Product created successfully",
+  "product": {
+    "product_id": 2,
+    "product_name": "Banana",
+    "product_price": 1.2,
+    "product_description": "Fresh ripe bananas",
+    "product_category_id": 3
+  }
+}
+            </pre>
+        </section>
+
+        <section id="update-product">
+            <h3>3. Update Product by ID</h3>
+            <p><strong>Endpoint:</strong> <code>/api/products/:id</code></p>
+            <p><strong>Method:</strong> PUT</p>
+            <p><strong>Description:</strong> Update the details of an existing product. Admins can modify the product's name, price, description, and category.</p>
+            <h4>Request:</h4>
+            <pre>
+PUT /api/products/2
+Content-Type: application/json
+
+{
+  "product_name": "Yellow Banana",
+  "product_price": 1.5,
+  "product_description": "Fresh yellow bananas",
+  "product_category_id": 3
+}
+            </pre>
+            <h4>Response:</h4>
+            <pre>
+{
+  "message": "Product updated successfully",
+  "product": {
+    "product_id": 2,
+    "product_name": "Yellow Banana",
+    "product_price": 1.5,
+    "product_description": "Fresh yellow bananas",
+    "product_category_id": 3
+  }
+}
+            </pre>
+        </section>
+
+        <section id="delete-product">
+            <h3>4. Delete Product by ID</h3>
+            <p><strong>Endpoint:</strong> <code>/api/products/:id</code></p>
+            <p><strong>Method:</strong> DELETE</p>
+            <p><strong>Description:</strong> Delete a product by its ID. Only Admins are allowed to perform this operation.</p>
+            <h4>Request:</h4>
+            <pre>
+DELETE /api/products/2
+            </pre>
+            <h4>Response:</h4>
+            <pre>
+{
+  "message": "Product deleted successfully"
+}
+            </pre>
+        </section>
+
+        <section id="get-all-categories">
+            <h3>5. Fetch All Categories</h3>
+            <p><strong>Endpoint:</strong> <code>/api/products/category/all</code></p>
+            <p><strong>Method:</strong> GET</p>
+            <p><strong>Description:</strong> Retrieve a list of all product categories. Admins can access this endpoint to view the available categories.</p>
+            <h4>Request:</h4>
+            <pre>
+GET /api/products/category/all
+            </pre>
+            <h4>Response:</h4>
+            <pre>
+{
+  "categories": [
+    {
+      "category_id": 1,
+      "category_name": "Fruits"
+    },
+    {
+      "category_id": 2,
+      "category_name": "Vegetables"
+    }
+  ]
+}
+            </pre>
+        </section>
+
+        <section id="get-products-by-category">
+            <h3>6. Fetch Products by Category</h3>
+            <p><strong>Endpoint:</strong> <code>/api/products/category/:categoryId</code></p>
+            <p><strong>Method:</strong> GET</p>
+            <p><strong>Description:</strong> Retrieve a list of products belonging to a specific category. Admins can use this endpoint to fetch products by category.</p>
+            <h4>Request:</h4>
+            <pre>
+GET /api/products/category/1
+            </pre>
+            <h4>Response:</h4>
+            <pre>
+{
+  "products": [
+    {
+      "product_id": 1,
+      "product_name": "Apple",
+      "product_price": 3.5,
+      "product_description": "Fresh red apples",
+      "product_category_id": 1
+    },
+    {
+      "product_id": 2,
+      "product_name": "Banana",
+      "product_price": 1.2,
+      "product_description": "Fresh ripe bananas",
+      "product_category_id": 1
+    }
+  ]
+}
+            </pre>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Mudirdokan. All rights reserved.</p>
+    </footer>
+</body>
+</html>
