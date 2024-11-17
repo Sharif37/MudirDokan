@@ -65,17 +65,16 @@ export async function deleteProduct(productId: number) {
 }
 
 // Fetch all categories
-export async function getAllCategories() {
+export  function getAllCategories() {
   return db.selectFrom('product_category')
-    .selectAll()
-    .execute();
+    .selectAll() ;
 }
 
 // Fetch all products in a specific category
-export async function getProductsByCategoryId(categoryId: number) {
+export  function getProductsByCategoryId(categoryId: number) {
   return db.selectFrom('product')
     .selectAll()
-    .where('product.product_category_id', '=', categoryId)
-    .execute();
+    .where('product.product_category_id', '=', categoryId) ;
+   
 }
 

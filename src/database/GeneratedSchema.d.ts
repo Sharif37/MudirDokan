@@ -81,7 +81,7 @@ export interface ProductItem {
 export interface ProductVariation {
   category_id: number | null;
   product_variation_id: Generated<number>;
-  variation_name: string | null;
+  variation_name: string | null;//size ,color ,brand
 }
 
 export interface Role {

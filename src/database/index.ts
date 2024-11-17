@@ -5,20 +5,6 @@ import { ColumnType, Generated, JSONColumnType, Selectable, Insertable, Updateab
 
 export type Timestamp = ColumnType<Date, Date | string, Date | string>;
 
-// Define the complete Database schema for Kysely
-export interface DB {
-  address: Address;
-  auth_session: AuthSession;
-  images: Images;
-  product: Product;
-  product_category: ProductCategory;
-  product_item: ProductItem;
-  product_variation: ProductVariation;
-  role: Role;
-  user_address: UserAddress;
-  users: Users;
-  variation_options: VariationOptions;
-}
 
 // Address table
 export interface Address {
@@ -127,7 +113,7 @@ export interface VariationOptions {
 }
 
 
-
+//cart table 
 
 
 export interface Images {
@@ -197,3 +183,37 @@ export type VariationOptionsUpdate = Updateable<VariationOptions>;
 export const db = new Kysely<DB>({
    dialect
   })
+
+
+// Define the complete Database schema for Kysely
+export interface DB {
+  address: Address;
+  auth_session: AuthSession;
+  images: Images;
+  product: Product;
+  product_category: ProductCategory;
+  product_item: ProductItem;
+  product_variation: ProductVariation;
+  role: Role;
+  user_address: UserAddress;
+  users: Users;
+  variation_options: VariationOptions;
+  
+}
+
+  export type TableName =
+  | 'address'
+  | 'auth_session'
+  | 'product'
+  | 'role'
+  | 'users'
+  | 'images'
+  | 'product_category'
+  | 'product_item'
+  | 'product_variation'
+  | 'variation_options'
+  | 'user_address' ;
+
+
+
+
